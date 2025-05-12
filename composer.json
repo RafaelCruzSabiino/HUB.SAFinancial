@@ -1,0 +1,19 @@
+{
+    "name": "hub/financial",
+    "autoload": {
+        "psr-4": {
+            "Hub\\Financial\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rafael Sabino",
+            "email": "rcsabino@paschoalotto.com.br"
+        }
+    ],
+    "require": {
+        "mark-gerarts/auto-mapper-plus": "^1.4",
+        "monolog/monolog": "^3.8",
+        "php-di/php-di": "^7.0"
+    }
+}
