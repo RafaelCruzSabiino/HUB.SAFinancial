@@ -2,10 +2,11 @@
 HUB controle financeiro
 
 # (DEV) COMO INSTALAR PROJETO
-CLONAR REPOSITORIO
+CLONAR REPOSITORIO 
 EXECUTAR VIA TERMINAL - composer dump-autoload
 
 # LIBS UTILIZADAS
-MAPPER - composer require "mark-gerarts/auto-mapper-plus"
-LOGGER - composer require monolog/monolog
-PHP DI - composer require php-di/php-di
+MAPPER - composer require "mark-gerarts/auto-mapper-plus" 
+LOGGER - composer require monolog/monolog 
+PHP DI - composer require php-di/php-di 
+ELOQUENT - composer require illuminate/database
