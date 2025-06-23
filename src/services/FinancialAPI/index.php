@@ -1,6 +1,7 @@
 <?php
 
-use Hub\Financial\services\FinancialAPI\Program;
+use Hub\Financial\bricks\API\API;
+use Hub\Financial\services\FinancialAPI\configurations\Configuration;
 
 require "../../../vendor/autoload.php";
 require "configurations/Routes.php";
@@ -14,7 +15,7 @@ if(!isset($router[$request]) || !array_key_exists($uri, $router[$request]))
     echo "Rota não encontrada!"; die;
 }
 
-$program = new Program();
+$program = new API();
 $controller = $router[$request][$uri];
 
-echo json_encode($program->Main($controller));
+echo json_encode($program->Build($controller, new Configuration()));

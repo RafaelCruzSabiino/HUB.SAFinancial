@@ -5,15 +5,21 @@ namespace Hub\Financial\services\FinancialAPI\configurations;
 use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\AutoMapperInterface;
 use Hub\Financial\bricks\Core\config\EnvLoader;
-use Hub\Financial\bricks\Core\logging\LoggerSettings;
 use Hub\Financial\bricks\Core\logging\MonoLogger;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
+use Hub\Financial\bricks\Core\config\IConfiguration;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
+use Hub\Financial\bricks\Core\logging\LoggerSettings;
 
-class Configuration
+class Configuration implements IConfiguration
 {    
     public function __construct(public EnvLoader $envLoader = new EnvLoader("FinancialAPI.env")){}
     
+    public function getEnvLoader() : EnvLoader
+    {
+        return $this->envLoader;
+    }
+
     public function ConfigureDependencies() : array
     {
         return  [
