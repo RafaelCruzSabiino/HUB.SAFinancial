@@ -19,9 +19,10 @@ class Program
             $builder->addDefinitions($this->configuration->ConfigureDependencies());
             $container = $builder->build();
 
-            $controllerInstance = $container->get("Hub\\Financial\\src\\services\\FinancialAPI\\controllers\\{$settings->Controller}");
+            $controllerInstance = $container->get("Hub\\Financial\\services\\FinancialAPI\\controllers\\{$settings->Controller}");
+            $action = $settings->Action;
             
-            return $controllerInstance->$settings->Action();
+            return $controllerInstance->$action();
         }
         catch(Exception $ex)
         {        

@@ -23,10 +23,10 @@ class MonoLogger implements ILoggerAdapter
         $log->warning($e->getMessage(), $e->getTrace());
     }   
     
-    public function SetInfo(Exception $e) : void
+    public function SetInfo(string $mensagem) : void
     {   
         $log = $this->Set(Level::Info);
-        $log->info($e->getMessage(), $e->getTrace());
+        $log->info($mensagem);
     }   
     
     private function Set(Level $level) : Logger
