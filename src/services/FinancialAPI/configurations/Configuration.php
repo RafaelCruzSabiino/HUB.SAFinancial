@@ -1,15 +1,15 @@
 <?php
 
-namespace Hub\Financial\services\FinancialAPI;
+namespace Hub\Financial\services\FinancialAPI\configurations;
 
 use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\AutoMapperInterface;
-use Hub\Financial\Brick\Core\config\EnvLoader;
+use Hub\Financial\brick\Core\config\EnvLoader;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
 
 class Configuration
 {    
-    public function __construct(public EnvLoader $envLoader = new EnvLoader("FinancialAPI.env")){}
+    public function __construct(public EnvLoader $envLoader = new EnvLoader("../FinancialAPI.env")){}
     
     public function ConfigureDependencies() : array
     {

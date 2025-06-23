@@ -1,0 +1,23 @@
+<?php
+
+use Hub\Financial\brick\API\config\RouteSettings;
+
+$router = [
+            #region "Rotas GET"
+            "GET" => [
+                        "consultar" => new RouteSettings("FinancialController", "Consultar")
+                     ],
+            #endregion
+
+            #regino "Rotas POST"
+            "POST" => [],
+            #endregion
+
+            #region "Rodas PUT"
+            "PUT" => [],
+            #endregion
+            
+            #region "Rodas DELETE"
+            "DELETE" => [],
+            #endregion
+          ];

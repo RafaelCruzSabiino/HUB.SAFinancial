@@ -1,6 +1,6 @@
 <?php
 
-namespace Hub\Financial\Brick\Core\config;
+namespace Hub\Financial\brick\Core\config;
 
 use InvalidArgumentException;
 
