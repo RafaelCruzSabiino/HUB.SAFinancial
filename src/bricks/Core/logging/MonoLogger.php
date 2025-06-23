@@ -32,7 +32,7 @@ class MonoLogger implements ILoggerAdapter
     private function Set(Level $level) : Logger
     {
         $log  = new Logger($this->settings->AppName);
-        $log->pushHandler(new StreamHandler($this->settings->Path, $level));
+        $log->pushHandler(new StreamHandler($this->settings->Path.date("Ymd").".log", $level));
 
         return $log;
     }
