@@ -9,7 +9,7 @@ use AutoMapperPlus\Configuration\AutoMapperConfig;
 
 class Configuration
 {    
-    public function __construct(public EnvLoader $envLoader = new EnvLoader("../FinancialAPI.env")){}
+    public function __construct(public EnvLoader $envLoader = new EnvLoader("FinancialAPI.env")){}
     
     public function ConfigureDependencies() : array
     {

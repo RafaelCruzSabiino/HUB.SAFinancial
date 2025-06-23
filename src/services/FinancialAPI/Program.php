@@ -1,10 +1,11 @@
 <?php
 
-namespace Hub\Financial\services\FinancialAPI\configurations;
+namespace Hub\Financial\services\FinancialAPI;
 
 use Exception;
 use DI\ContainerBuilder;
 use Hub\Financial\brick\API\config\RouteSettings;
+use Hub\Financial\services\FinancialAPI\configurations\Configuration;
 
 class Program
 {
