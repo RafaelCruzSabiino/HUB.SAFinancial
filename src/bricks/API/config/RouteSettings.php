@@ -1,6 +1,6 @@
 <?php
 
-namespace Hub\Financial\brick\API\config;
+namespace Hub\Financial\bricks\API\config;
 
 class RouteSettings
 {

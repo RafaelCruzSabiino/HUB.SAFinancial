@@ -1,6 +1,6 @@
 <?php
 
-namespace Hub\Financial\brick\Core\logging;
+namespace Hub\Financial\bricks\Core\logging;
 
 use Exception;
 use Monolog\Level;

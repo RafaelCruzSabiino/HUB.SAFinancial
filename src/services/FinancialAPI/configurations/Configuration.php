@@ -4,7 +4,7 @@ namespace Hub\Financial\services\FinancialAPI\configurations;
 
 use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\AutoMapperInterface;
-use Hub\Financial\brick\Core\config\EnvLoader;
+use Hub\Financial\bricks\Core\config\EnvLoader;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
 
 class Configuration

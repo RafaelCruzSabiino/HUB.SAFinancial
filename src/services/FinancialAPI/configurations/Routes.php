@@ -1,6 +1,6 @@
 <?php
 
-use Hub\Financial\brick\API\config\RouteSettings;
+use Hub\Financial\bricks\API\config\RouteSettings;
 
 $router = [
             #region "Rotas GET"

@@ -4,7 +4,7 @@ namespace Hub\Financial\services\FinancialAPI;
 
 use Exception;
 use DI\ContainerBuilder;
-use Hub\Financial\brick\API\config\RouteSettings;
+use Hub\Financial\bricks\API\config\RouteSettings;
 use Hub\Financial\services\FinancialAPI\configurations\Configuration;
 
 class Program
@@ -19,7 +19,7 @@ class Program
             $builder->addDefinitions($this->configuration->ConfigureDependencies());
             $container = $builder->build();
 
-            $controllerInstance = $container->get("Hub\\Financial\\src\\services\\FinancialAPI\\controllers\\".$settings->Controller);
+            $controllerInstance = $container->get("Hub\\Financial\\src\\services\\FinancialAPI\\controllers\\{$settings->Controller}");
             
             return $controllerInstance->$settings->Action();
         }
