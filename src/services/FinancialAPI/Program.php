@@ -25,7 +25,8 @@ class Program
         }
         catch(Exception $ex)
         {        
-            throw $ex;
+            http_response_code(500);
+            return $ex->getMessage();
         }
     }
 }

@@ -5,7 +5,7 @@ use Hub\Financial\bricks\API\config\RouteSettings;
 $router = [
             #region "Rotas GET"
             "GET" => [
-                        "consultar" => new RouteSettings("FinancialController", "Consultar")
+                        "/consultar" => new RouteSettings("FinancialController", "Consultar")
                      ],
             #endregion
 
