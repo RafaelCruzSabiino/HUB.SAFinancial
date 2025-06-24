@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: application/json');
+
 use Hub\Financial\bricks\API\API;
 use Hub\Financial\services\FinancialAPI\configurations\Configuration;
 

@@ -2,7 +2,8 @@
 
 namespace Hub\Financial\bricks\API;
 
-use Exception;
+use Hub\Financial\bricks\API\exception\HttpException;
+use Throwable;
 use DI\ContainerBuilder;
 use Hub\Financial\bricks\API\config\RouteSettings;
 use Hub\Financial\bricks\Core\config\IConfiguration;
@@ -22,10 +23,15 @@ class API
             
             return $controllerInstance->$action();
         }
-        catch(Exception $ex)
+        catch(HttpException $ex)
+        {
+            http_response_code($ex->statusCode);
+            return ["error" => $ex->getMessage()];
+        }
+        catch(Throwable $ex)
         {        
             http_response_code(500);
-            return $ex->getMessage();
+            return ["error" => $ex->getMessage()];
         }
     }
 
