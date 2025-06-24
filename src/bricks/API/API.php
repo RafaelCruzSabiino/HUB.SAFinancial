@@ -2,11 +2,12 @@
 
 namespace Hub\Financial\bricks\API;
 
-use Hub\Financial\bricks\API\exception\HttpException;
 use Throwable;
 use DI\ContainerBuilder;
 use Hub\Financial\bricks\API\config\RouteSettings;
 use Hub\Financial\bricks\Core\config\IConfiguration;
+use Hub\Financial\bricks\API\exception\HttpException;
+use Hub\Financial\bricks\Core\exception\ConfigurationNotImplementedException;
 
 class API
 {
@@ -14,6 +15,11 @@ class API
     {
         try
         {
+            if(empty($settings->Project)
+                || empty($settings->Controller)
+                || empty($settings->Action))
+                throw new ConfigurationNotImplementedException("Build Rotas");
+
             $builder = new ContainerBuilder();
             $builder->addDefinitions($configuration->ConfigureDependencies());
             $container = $builder->build();
@@ -29,7 +35,7 @@ class API
             return ["error" => $ex->getMessage()];
         }
         catch(Throwable $ex)
-        {        
+        {  
             http_response_code(500);
             return ["error" => $ex->getMessage()];
         }
