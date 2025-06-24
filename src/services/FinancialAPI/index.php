@@ -9,6 +9,5 @@ require "../../../vendor/autoload.php";
 $routes = include __DIR__ . "/configurations/Routes.php";
 
 $program = new API();
-$settings = $program->GetSettings($routes);
 
-echo json_encode($program->Build($settings, new Configuration()));
+echo json_encode($program->RunApp($routes, new Configuration()));

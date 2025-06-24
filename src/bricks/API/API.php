@@ -11,20 +11,12 @@ use Hub\Financial\bricks\Core\exception\ConfigurationNotImplementedException;
 
 class API
 {
-    public function Build(RouteSettings $settings, IConfiguration $configuration): mixed
+    public function RunApp(array $routes, IConfiguration $configuration): mixed
     {
         try
         {
-            if(empty($settings->Project)
-                || empty($settings->Controller)
-                || empty($settings->Action))
-                throw new ConfigurationNotImplementedException("Build Rotas");
-
-            $builder = new ContainerBuilder();
-            $builder->addDefinitions($configuration->ConfigureDependencies());
-            $container = $builder->build();
-
-            $controllerInstance = $container->get("Hub\\Financial\\services\\{$settings->Project}\\controllers\\{$settings->Controller}");
+            $settings = $this->GetSettings($routes);
+            $controllerInstance = $this->Build($settings, $configuration);
             $action = $settings->Action;
             
             return $controllerInstance->$action();
@@ -41,17 +33,30 @@ class API
         }
     }
 
-    public function GetSettings(array $routes): RouteSettings
+    private function GetSettings(array $routes): RouteSettings
     {
         $uri     = parse_url($_SERVER["REQUEST_URI"])["path"];
         $request = $_SERVER["REQUEST_METHOD"];
 
         if(!isset($routes[$request]) || !array_key_exists($uri, $routes[$request]))
-        {
-            http_response_code(404);
-            echo "Rota não encontrada!"; die;
-        }
+            throw new HttpException("Rota não encontrada", 404);
 
-        return $routes[$request][$uri];
+        $settings = $routes[$request][$uri];
+
+        if(empty($settings->Project)
+            || empty($settings->Controller)
+            || empty($settings->Action))
+            throw new ConfigurationNotImplementedException("Build Rotas");
+
+        return $settings;
+    }
+
+    private function Build(RouteSettings $settings, IConfiguration $configuration): mixed
+    {  
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions($configuration->ConfigureDependencies());
+        $container = $builder->build();
+
+        return $container->get("Hub\\Financial\\services\\{$settings->Project}\\controllers\\{$settings->Controller}");
     }
 }
