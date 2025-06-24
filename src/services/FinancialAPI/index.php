@@ -4,7 +4,7 @@ use Hub\Financial\bricks\API\API;
 use Hub\Financial\services\FinancialAPI\configurations\Configuration;
 
 require "../../../vendor/autoload.php";
-$routes = include "configurations/Routes.php";
+$routes = include __DIR__ . "/configurations/Routes.php";
 
 $program = new API();
 $settings = $program->GetSettings($routes);
