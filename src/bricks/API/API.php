@@ -28,4 +28,18 @@ class API
             return $ex->getMessage();
         }
     }
+
+    public function GetSettings(array $routes): RouteSettings
+    {
+        $uri     = parse_url($_SERVER["REQUEST_URI"])["path"];
+        $request = $_SERVER["REQUEST_METHOD"];
+
+        if(!isset($routes[$request]) || !array_key_exists($uri, $routes[$request]))
+        {
+            http_response_code(404);
+            echo "Rota não encontrada!"; die;
+        }
+
+        return $routes[$request][$uri];
+    }
 }
