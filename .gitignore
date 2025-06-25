@@ -1,0 +1,4 @@
+/vendor/
+/.vscode/
+src/services/FinancialAPI/FinancialAPI.env
+src/services/FinancialAPI/log
