@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 use Hub\Financial\bricks\API\API;
-use Hub\Financial\services\FinancialAPI\configurations\Configuration;
+use Hub\Financial\projects\FinancialAPI\configurations\Configuration;
 
 require "../../../vendor/autoload.php";
 $routes = include __DIR__ . "/configurations/Routes.php";

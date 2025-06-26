@@ -57,6 +57,6 @@ class API
         $builder->addDefinitions($configuration->ConfigureDependencies());
         $container = $builder->build();
 
-        return $container->get("Hub\\Financial\\services\\{$settings->Project}\\controllers\\{$settings->Controller}");
+        return $container->get("Hub\\Financial\\projects\\{$settings->Project}\\controllers\\{$settings->Controller}");
     }
 }

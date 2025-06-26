@@ -1,6 +1,6 @@
 <?php
 
-namespace Hub\Financial\services\FinancialAPI\controllers;
+namespace Hub\Financial\projects\FinancialAPI\controllers;
 
 use Hub\Financial\bricks\API\exception\HttpException;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;

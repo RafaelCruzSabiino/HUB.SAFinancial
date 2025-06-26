@@ -1,6 +1,6 @@
 <?php
 
-namespace Hub\Financial\services\FinancialAPI\configurations;
+namespace Hub\Financial\projects\FinancialAPI\configurations;
 
 use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\AutoMapperInterface;
