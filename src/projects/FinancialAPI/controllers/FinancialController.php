@@ -17,7 +17,7 @@ class FinancialController
     {
         $dto = new AuthenticationDto();
         $dto->User = "rcsabino@pascholotto.com.br";
-        $dto->Password = "123456";
+        $dto->Password = md5("123456789");
 
         return $this->application->GenerateToken($dto);
     }
