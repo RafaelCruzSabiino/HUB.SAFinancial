@@ -2,11 +2,11 @@
 
 namespace Hub\Financial\bricks\API;
 
-use Hub\Financial\bricks\Core\exception\GeneralException;
 use Throwable;
 use DI\ContainerBuilder;
 use Hub\Financial\bricks\API\config\RouteSettings;
 use Hub\Financial\bricks\Core\config\IConfiguration;
+use Hub\Financial\bricks\Core\exception\GeneralException;
 use Hub\Financial\bricks\Core\exception\ConfigurationNotImplementedException;
 
 class API
@@ -54,7 +54,7 @@ class API
     private function Build(RouteSettings $settings, IConfiguration $configuration): mixed
     {  
         $builder = new ContainerBuilder();
-        $builder->addDefinitions($configuration->ConfigureDependencies());
+        $builder->addDefinitions($configuration::ConfigureApp());
         $container = $builder->build();
 
         return $container->get("Hub\\Financial\\projects\\{$settings->Project}\\controllers\\{$settings->Controller}");
