@@ -7,11 +7,14 @@ use AutoMapperPlus\AutoMapperInterface;
 use Hub\Financial\bricks\Core\config\EnvLoader;
 use Hub\Financial\bricks\Core\logging\MonoLogger;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
-use Illuminate\Database\Capsule\Manager as Capsule;
 use Hub\Financial\bricks\Core\config\IConfiguration;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
 use Hub\Financial\bricks\Core\logging\LoggerSettings;
-use Hub\Financial\bricks\Core\exception\ConfigurationNotImplementedException;
+use Hub\Financial\services\Application\AuthenticationApplication;
+use Hub\Financial\services\Infrastructure\config\RepositoryConfiguration;
+use Hub\Financial\services\Infrastructure\repositories\AuthenticationRepository;
+use Hub\Financial\services\Domain\interfaces\applications\IAuthenticationApplication;
+use Hub\Financial\services\Domain\interfaces\infrastructures\IAuthenticationInfrastructure;
 
 class Configuration implements IConfiguration
 {    
@@ -24,14 +27,16 @@ class Configuration implements IConfiguration
 
     public function ConfigureDependencies() : array
     {
-        $this->ConfigureRepository();
+        RepositoryConfiguration::ConfigureRepository($this->envLoader);
 
         return  [
                     LoggerSettings::class => \DI\create(LoggerSettings::class)->constructor(
                         $this->envLoader->get('APP_NAME') ?? "",
                         $this->envLoader->get('PATH_LOG') ?? ""                 
                     ),
-                    ILoggerAdapter::class => \DI\get(MonoLogger::class)
+                    ILoggerAdapter::class => \DI\get(MonoLogger::class),
+                    IAuthenticationApplication::class => \DI\get(AuthenticationApplication::class),
+                    IAuthenticationInfrastructure::class => \DI\get(AuthenticationRepository::class)
                 ];
     }
 
@@ -39,31 +44,5 @@ class Configuration implements IConfiguration
     {
         return AutoMapper::initialize(function (AutoMapperConfig $config) 
         {});
-    }
-
-    private function ConfigureRepository() : void
-    {
-        if(empty($this->envLoader->get('DB_DRIVER'))
-            || empty($this->envLoader->get('DB_HOST'))
-            || empty($this->envLoader->get('DB_BASE'))
-            || empty($this->envLoader->get('DB_USER'))
-            || empty($this->envLoader->get('DB_SENHA')))
-            throw new ConfigurationNotImplementedException("Repository");
-
-        $capsule = new Capsule;
-
-        $capsule->addConnection([
-            'driver'    => $this->envLoader->get('DB_DRIVER'),
-            'host'      => $this->envLoader->get('DB_HOST'),
-            'database'  => $this->envLoader->get('DB_BASE'),
-            'username'  => $this->envLoader->get('DB_USER'),
-            'password'  => $this->envLoader->get('DB_SENHA'),
-            'charset'   => $this->envLoader->get('DB_CHARSET') ?? "utf8",
-            'collation' => $this->envLoader->get('DB_COLLATION') ?? "utf8_unicode_ci",
-            'prefix'    => $this->envLoader->get('DB_PREFIX') ?? ""
-        ]);
-
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
     }
 }
