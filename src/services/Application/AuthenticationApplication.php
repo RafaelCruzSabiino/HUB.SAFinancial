@@ -10,6 +10,7 @@ use Hub\Financial\services\Domain\dtos\AuthenticationDto;
 use Hub\Financial\services\Domain\entities\AuthenticationEntity;
 use Hub\Financial\services\Domain\interfaces\applications\IAuthenticationApplication;
 use Hub\Financial\services\Domain\interfaces\infrastructures\IAuthenticationInfrastructure;
+use Throwable;
 
 class AuthenticationApplication implements IAuthenticationApplication
 {
@@ -20,10 +21,18 @@ class AuthenticationApplication implements IAuthenticationApplication
 
     public function GenerateToken(AuthenticationDto $authenticationDto) : TokenDto
     {
-        if(!$this->infra->ValidAutentication(
-            $this->mapper->MapObject($authenticationDto, AuthenticationEntity::class)))
-            throw new GeneralException("Usuário não encontrado!", 401);
+        try
+        {
+            if(!$this->infra->ValidAutentication(
+                $this->mapper->MapObject($authenticationDto, AuthenticationEntity::class)))
+                throw new GeneralException("Usuário não encontrado!", 401);
 
-        return new TokenDto();
+            return new TokenDto();
+        }
+        catch(Throwable $ex)
+        {
+            $this->logger->SetError($ex);
+            throw $ex;
+        }
     }
 }
