@@ -13,7 +13,7 @@ use Hub\Financial\bricks\Core\logging\LoggerSettings;
 
 class Configuration implements IConfiguration
 {    
-    public function __construct(public EnvLoader $envLoader = new EnvLoader("FinancialAPI.env")){}
+    public function __construct(private EnvLoader $envLoader = new EnvLoader("FinancialAPI.env")){}
     
     public function getEnvLoader() : EnvLoader
     {
