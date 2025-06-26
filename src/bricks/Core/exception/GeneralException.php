@@ -1,10 +1,10 @@
 <?php
 
-namespace Hub\Financial\bricks\API\exception;
+namespace Hub\Financial\bricks\Core\exception;
 
 use Exception;
 
-class HttpException extends Exception
+class GeneralException extends Exception
 {
     public int $statusCode;
 

@@ -2,11 +2,11 @@
 
 namespace Hub\Financial\bricks\API;
 
+use Hub\Financial\bricks\Core\exception\GeneralException;
 use Throwable;
 use DI\ContainerBuilder;
 use Hub\Financial\bricks\API\config\RouteSettings;
 use Hub\Financial\bricks\Core\config\IConfiguration;
-use Hub\Financial\bricks\API\exception\HttpException;
 use Hub\Financial\bricks\Core\exception\ConfigurationNotImplementedException;
 
 class API
@@ -21,7 +21,7 @@ class API
             
             return $controllerInstance->$action();
         }
-        catch(HttpException $ex)
+        catch(GeneralException $ex)
         {
             http_response_code($ex->statusCode);
             return ["error" => $ex->getMessage()];
@@ -39,7 +39,7 @@ class API
         $request = $_SERVER["REQUEST_METHOD"];
 
         if(!isset($routes[$request]) || !array_key_exists($uri, $routes[$request]))
-            throw new HttpException("Rota não encontrada", 404);
+            throw new GeneralException("Rota não encontrada", 404);
 
         $settings = $routes[$request][$uri];
 

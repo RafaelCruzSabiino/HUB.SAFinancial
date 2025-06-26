@@ -2,7 +2,7 @@
 
 namespace Hub\Financial\services\Application;
 
-use Hub\Financial\bricks\API\exception\HttpException;
+use Hub\Financial\bricks\Core\exception\GeneralException;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
 use Hub\Financial\bricks\Core\mapper\IMapper;
 use Hub\Financial\services\Domain\dtos\TokenDto;
@@ -22,7 +22,7 @@ class AuthenticationApplication implements IAuthenticationApplication
     {
         if(!$this->infra->ValidAutentication(
             $this->mapper->MapObject($authenticationDto, AuthenticationEntity::class)))
-            throw new HttpException("Usuário não encontrado!", 401);
+            throw new GeneralException("Usuário não encontrado!", 401);
 
         return new TokenDto();
     }

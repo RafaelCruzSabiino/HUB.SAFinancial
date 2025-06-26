@@ -2,9 +2,7 @@
 
 namespace Hub\Financial\bricks\Core\exception;
 
-use Exception;
-
-class ConfigurationNotImplementedException extends Exception
+class ConfigurationNotImplementedException extends GeneralException
 {
     public function __construct(string $message)
     {
