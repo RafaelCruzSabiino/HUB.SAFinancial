@@ -2,9 +2,12 @@
 
 namespace Hub\Financial\services\Application;
 
+use Hub\Financial\bricks\API\exception\HttpException;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
+use Hub\Financial\bricks\Core\mapper\IMapper;
 use Hub\Financial\services\Domain\dtos\TokenDto;
 use Hub\Financial\services\Domain\dtos\AuthenticationDto;
+use Hub\Financial\services\Domain\entities\AuthenticationEntity;
 use Hub\Financial\services\Domain\interfaces\applications\IAuthenticationApplication;
 use Hub\Financial\services\Domain\interfaces\infrastructures\IAuthenticationInfrastructure;
 
@@ -12,10 +15,15 @@ class AuthenticationApplication implements IAuthenticationApplication
 {
     public function __construct(
         private ILoggerAdapter $logger,
-        private IAuthenticationInfrastructure $infra){}
+        private IAuthenticationInfrastructure $infra,
+        private IMapper $mapper){}
 
     public function GenerateToken(AuthenticationDto $authenticationDto) : TokenDto
     {
+        if(!$this->infra->ValidAutentication(
+            $this->mapper->MapObject($authenticationDto, AuthenticationEntity::class)))
+            throw new HttpException("Usuário não encontrado!", 401);
+
         return new TokenDto();
     }
 }

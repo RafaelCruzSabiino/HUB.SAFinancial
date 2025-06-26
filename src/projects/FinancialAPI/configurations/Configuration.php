@@ -10,7 +10,11 @@ use AutoMapperPlus\Configuration\AutoMapperConfig;
 use Hub\Financial\bricks\Core\config\IConfiguration;
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
 use Hub\Financial\bricks\Core\logging\LoggerSettings;
+use Hub\Financial\bricks\Core\mapper\IMapper;
+use Hub\Financial\bricks\Core\mapper\Mapper;
 use Hub\Financial\services\Application\AuthenticationApplication;
+use Hub\Financial\services\Domain\dtos\AuthenticationDto;
+use Hub\Financial\services\Domain\entities\AuthenticationEntity;
 use Hub\Financial\services\Infrastructure\config\RepositoryConfiguration;
 use Hub\Financial\services\Infrastructure\repositories\AuthenticationRepository;
 use Hub\Financial\services\Domain\interfaces\applications\IAuthenticationApplication;
@@ -30,6 +34,8 @@ class Configuration implements IConfiguration
         RepositoryConfiguration::ConfigureRepository($this->envLoader);
 
         return  [
+                    IConfiguration::class => \DI\get(Configuration::class),
+                    IMapper::class => \DI\get(Mapper::class),
                     LoggerSettings::class => \DI\create(LoggerSettings::class)->constructor(
                         $this->envLoader->get('APP_NAME') ?? "",
                         $this->envLoader->get('PATH_LOG') ?? ""                 
@@ -43,6 +49,8 @@ class Configuration implements IConfiguration
     public function ConfigureMapper() : AutoMapperInterface
     {
         return AutoMapper::initialize(function (AutoMapperConfig $config) 
-        {});
+        {
+            $config->registerMapping(AuthenticationDto::class, AuthenticationEntity::class);
+        });
     }
 }
