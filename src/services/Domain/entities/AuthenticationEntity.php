@@ -13,5 +13,7 @@ class AuthenticationEntity extends Model
         'password'
     ];
 
-     public $timestamps = false;
+    public string $User;
+    public string $Password;  
+    public $timestamps = false;
 }

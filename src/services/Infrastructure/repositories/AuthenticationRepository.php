@@ -9,8 +9,8 @@ class AuthenticationRepository implements IAuthenticationInfrastructure
 {
     public function ValidAutentication(AuthenticationEntity $authenticationEntity) : bool
     {
-        return AuthenticationEntity::where('user', $authenticationEntity->user)
-                                    ->where('password', $authenticationEntity->password)
+        return AuthenticationEntity::where('user', $authenticationEntity->User)
+                                    ->where('password', $authenticationEntity->Password)
                                     ->exists();
     }
 }

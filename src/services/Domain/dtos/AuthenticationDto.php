@@ -4,11 +4,11 @@ namespace Hub\Financial\services\Domain\dtos;
 
 class AuthenticationDto
 {
-    public string $user = "";
-    public string $password = "";
+    public string $User = "";
+    public string $Password = "";
 
     public function Encrypt() : void
     {
-        $this->password = md5($this->password);
+        $this->Password = md5($this->Password);
     }
 }
