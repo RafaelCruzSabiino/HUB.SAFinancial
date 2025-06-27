@@ -5,6 +5,7 @@ namespace Hub\Financial\projects\FinancialAPI\configurations;
 use AutoMapperPlus\AutoMapper;
 use AutoMapperPlus\AutoMapperInterface;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
+use AutoMapperPlus\DataType;
 use Hub\Financial\services\Domain\dtos\AuthenticationDto;
 use Hub\Financial\services\Domain\entities\AuthenticationEntity;
 
@@ -14,6 +15,7 @@ class MapperConfiguration
     {
         return AutoMapper::initialize(function (AutoMapperConfig $config) 
         {
+            $config->registerMapping(DataType::ARRAY, AuthenticationDto::class);
             $config->registerMapping(AuthenticationDto::class, AuthenticationEntity::class);
         });
     }

@@ -3,6 +3,7 @@
 namespace Hub\Financial\projects\FinancialAPI\controllers;
 
 use Hub\Financial\bricks\Core\logging\ILoggerAdapter;
+use Hub\Financial\bricks\Core\mapper\IMapper;
 use Hub\Financial\services\Domain\dtos\AuthenticationDto;
 use Hub\Financial\services\Domain\dtos\TokenDto;
 use Hub\Financial\services\Domain\interfaces\applications\IAuthenticationApplication;
@@ -11,15 +12,14 @@ class FinancialController
 {
     public function __construct(
         private ILoggerAdapter $logger,
-        private IAuthenticationApplication $application){}
+        private IAuthenticationApplication $application,
+        private IMapper $mapper){}
 
-    public function Consultar() : TokenDto
+    public function Consultar(array $request) : TokenDto
     {
-        $dto = new AuthenticationDto();
-        $dto->User = "rcsabino@pascholotto.com.br";
-        $dto->Password = md5("123456789");
-
-        return $this->application->GenerateToken($dto);
+        return $this->application->GenerateToken(
+            $this->mapper->MapRequest($request, AuthenticationDto::class)
+        );
     }
 }
 

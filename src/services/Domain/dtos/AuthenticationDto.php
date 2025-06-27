@@ -4,6 +4,6 @@ namespace Hub\Financial\services\Domain\dtos;
 
 class AuthenticationDto
 {
-    public string $User;
-    public string $Password;
+    public string $User = "";
+    public string $Password = "";
 }

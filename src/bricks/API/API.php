@@ -16,10 +16,7 @@ class API
         try
         {
             $settings = $this->GetSettings($routes);
-            $controllerInstance = $this->Build($settings, $configuration);
-            $action = $settings->Action;
-            
-            return $controllerInstance->$action();
+            return $settings->Dispatch($this->Build($settings, $configuration));
         }
         catch(GeneralException $ex)
         {

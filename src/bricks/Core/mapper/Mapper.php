@@ -12,4 +12,9 @@ class Mapper implements IMapper
     {
         return $this->mapper->map($obj, $model);
     }
+    
+    public function MapRequest(array $data, string $model): object
+    {   
+        return $this->mapper->map($data, $model);
+    }
 }
