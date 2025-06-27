@@ -23,6 +23,8 @@ class AuthenticationApplication implements IAuthenticationApplication
     {
         try
         {
+            $authenticationDto->Encrypt();
+
             if(!$this->infra->ValidAutentication(
                 $this->mapper->MapObject($authenticationDto, AuthenticationEntity::class)))
                 throw new GeneralException("Usuário não encontrado!", 401);
